@@ -1,0 +1,14 @@
+.card
+{
+    display: inline-block;
+}
+
+form > div
+{
+    max-width: 300px;
+}
+
+.contenu
+{
+    padding: 20px;
+}
