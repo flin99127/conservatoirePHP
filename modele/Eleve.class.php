@@ -28,6 +28,21 @@ class Eleve
 
         return $lesResultats;
     }
+	public static function afficherEleve(int $unIdEleve)
+	{
+		$req = MonPdo::getInstance() -> prepare("SELECT * FROM veleve where id = :id");
+        $req->bindParam('id', $unIdEleve , PDO::PARAM_INT);
+        $req -> setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'eleve');
+        $req -> execute();
+        $lesResultats = $req -> fetchAll();
+
+		foreach($lesResultats as $unEleve)
+		{
+			$eleve = $unEleve;
+		}
+
+        return $eleve;
+	}
 
 	/**
 	 * @return 
@@ -128,7 +143,7 @@ class Eleve
 	/**
 	 * @return 
 	 */
-	public function getNiveau(): string {
+	public function getNiveau(): int {
 		return $this->niveau;
 	}
 	
@@ -144,7 +159,7 @@ class Eleve
 	/**
 	 * @return 
 	 */
-	public function getBourse(): string {
+	public function getBourse(): int {
 		return $this->bourse;
 	}
 	

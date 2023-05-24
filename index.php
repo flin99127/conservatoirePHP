@@ -12,7 +12,7 @@ if(isset($_SESSION['autorisation']))
 
 if(empty($_GET["uc"]))
 {
-    $uc = "accueil";
+    $uc = "connexion";
 }
 else
 {
@@ -21,7 +21,7 @@ else
 
 switch($uc)
 {
-    case "accueil":
+    case "connexion":
         include "vue/connexion.php";
         break;
     case "admin":

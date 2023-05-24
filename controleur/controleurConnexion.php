@@ -1,9 +1,6 @@
 <?php
 
-if(isset($_GET['choix']))
-{
-    $choix = $_GET['choix'];
-}
+include ("modele/Admin.class.php");
 
 if(isset($_POST['login']) && isset($_POST['mdp']))
 {
@@ -11,10 +8,15 @@ if(isset($_POST['login']) && isset($_POST['mdp']))
     $mdp = $_POST['mdp'];
 }
 
+if(isset($_GET['choix']))
+{
+    $choix = $_GET['choix'];
+}
+
 switch($choix)
 {
     case "formulaire":
-        include "vue/headerAccueil.php";
+        //include "vue/headerAccueil.php";
         break;
 
     case "verif":
@@ -22,8 +24,8 @@ switch($choix)
         /*$req = admin::verifier($_POST["login"], md5($_POST["mdp"]));
 
         if($req == true)
-        {*/
-            $_SESSION["autorisation"] = "ok";
+        {
+            $_SESSION["autorisation"] = "ok";*/
             include("vue/headerAccueil.php");
             include("vue/accueil.php");
         /*}
@@ -97,6 +99,7 @@ switch($choix)
             break;
         
         case "inscription2":
+            include("modele/Eleve.class.php");
             include("modele/Inscription.class.php");
             include("modele/Seance.class.php");
 
@@ -108,7 +111,7 @@ switch($choix)
 
                 $capacite = Seance::afficherCapacite($seance);
 
-                if(Inscription::verifierCapacite($seance, $capacite))
+                if(Inscription::verifierCapacite($seance, $capacite) && (Eleve::afficherEleve($eleve))->getNiveau() == Seance::afficherNiveau($seance))
                 {
                     Inscription::insertInscription($prof, $eleve, $seance);
 

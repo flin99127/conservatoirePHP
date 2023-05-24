@@ -9,7 +9,7 @@
                 <?php
                 foreach($lesSeance as $uneSeance)
                 {
-                    echo '<option value="'.$uneSeance->NUMSEANCE.'">'.$uneSeance->TRANCHE.' '.$uneSeance->JOUR.', '.$uneSeance->CAPACITE.'</option>';
+                    echo '<option value="'.$uneSeance->NUMSEANCE.'">'.$uneSeance->TRANCHE.' '.$uneSeance->JOUR.', '.$uneSeance->NIVEAU.', '.$uneSeance->CAPACITE.'</option>';
                 }
                 ?>
             </select>

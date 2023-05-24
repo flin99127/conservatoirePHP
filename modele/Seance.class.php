@@ -44,6 +44,21 @@ class Seance
 
         return $capacite;
 	}
+	public static function afficherNiveau(int $numSeance)
+	{
+		$req = MonPdo::getInstance() -> prepare("SELECT * FROM seance where numseance = :numseance");
+        $req->bindParam('numseance', $numSeance , PDO::PARAM_INT);
+        $req -> setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'seance');
+        $req -> execute();
+        $lesResultats = $req -> fetchAll();
+
+		foreach($lesResultats as $uneSeance)
+		{
+			$niveau = $uneSeance->NIVEAU;
+		}
+
+        return $niveau;
+	}
 
 	/**
 	 * @return 
