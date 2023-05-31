@@ -2,12 +2,6 @@
 
 include ("modele/Admin.class.php");
 
-if(isset($_POST['login']) && isset($_POST['mdp']))
-{
-    $login = $_POST['login'];
-    $mdp = $_POST['mdp'];
-}
-
 if(isset($_GET['choix']))
 {
     $choix = $_GET['choix'];
@@ -15,24 +9,33 @@ if(isset($_GET['choix']))
 
 switch($choix)
 {
-    case "formulaire":
-        //include "vue/headerAccueil.php";
+    case "accueil":
+        include "vue/headerAccueil.php";
+        include("vue/accueil.php");
+
         break;
 
     case "verif":
+        include ("modele/Login.class.php");
 
-        /*$req = admin::verifier($_POST["login"], md5($_POST["mdp"]));
+        if(isset($_POST['login']) && isset($_POST['mdp']))
+        {
+            $login = $_POST['login'];
+            $mdp = $_POST['mdp'];
 
-        if($req == true)
-        {
-            $_SESSION["autorisation"] = "ok";*/
-            include("vue/headerAccueil.php");
-            include("vue/accueil.php");
-        /*}
-        else
-        {
-            include("vue/echecRecherche.php");
-        }*/
+            $req = Login::verifLogin($login, md5($mdp), Login::recupJson());
+
+            if($req == true)
+            {
+                $_SESSION["autorisation"] = 'ok';
+                include("vue/headerAccueil.php");
+                include("vue/accueil.php");
+            }
+            else
+            {
+                include("vue/echecRecherche.php");
+            }
+        }
         break;
     
     case "accueilEleve":
